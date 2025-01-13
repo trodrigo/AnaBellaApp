@@ -1,6 +1,6 @@
 ﻿namespace AnaBellaApp.Web.Models.Store
 {
-    public class CategoryModel
+    public class CategoryViewModel
     {
         public long Id { get; set; }
         public string Name { get; set; }

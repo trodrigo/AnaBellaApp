@@ -9,11 +9,11 @@
     }
   },
   "profiles": {
-    "http": {
+    "AnaBellaApp.Web": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5086",
+      "applicationUrl": "http://localhost:4431",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
