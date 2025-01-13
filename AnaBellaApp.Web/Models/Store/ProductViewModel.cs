@@ -1,10 +1,6 @@
-﻿using AnaBellaApp.ProductAPI.Model;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace AnaBellaApp.ProductAPI.Data.ValueObjects
+﻿namespace AnaBellaApp.Web.Models.Store
 {
-    public class ProductVO
+    public class ProductViewModel
     {
         public long Id { get; set; }
         public string Name { get; set; }
