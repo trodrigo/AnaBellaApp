@@ -44,6 +44,20 @@ namespace AnaBellaApp.ProductAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Description = "Bermudas em geral",
+                            Name = "Bermudas"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Description = "Camisetas e blusas em geral",
+                            Name = "Camisetas e Blusas"
+                        });
                 });
 
             modelBuilder.Entity("AnaBellaApp.ProductAPI.Model.Product", b =>
@@ -85,6 +99,35 @@ namespace AnaBellaApp.ProductAPI.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("product");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CategoryId = 1L,
+                            Description = "Bermuda linho com elastano. Tamanho 40 ao 48",
+                            ImageURL = "https://github.com/trodrigo/AnaBellaApp/blob/master/AnaBellaImages/bermuda_linho_elastano.jpg",
+                            Name = "Bermuda linho",
+                            Price = 69.9m
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            CategoryId = 2L,
+                            Description = "Blusa canelada com manga tamanho único regular",
+                            ImageURL = "https://github.com/trodrigo/AnaBellaApp/blob/master/AnaBellaImages/blusa_canelada.jpg",
+                            Name = "Blusa canelada",
+                            Price = 69.9m
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            CategoryId = 2L,
+                            Description = "Regata canelada com manga tamanho único regular",
+                            ImageURL = "https://github.com/trodrigo/AnaBellaApp/blob/master/AnaBellaImages/regata_canelada.jpg",
+                            Name = "Regata canelada",
+                            Price = 69.9m
+                        });
                 });
 
             modelBuilder.Entity("AnaBellaApp.ProductAPI.Model.Product", b =>

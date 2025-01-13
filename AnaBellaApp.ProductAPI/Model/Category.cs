@@ -8,6 +8,8 @@ namespace AnaBellaApp.ProductAPI.Model
     [Table("category")]
     public class Category : BaseEntity
     {
+        public Category() {}
+
         public Category(string name, string description = "")
         {
             this.Name = name;
