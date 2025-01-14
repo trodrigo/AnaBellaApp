@@ -1,6 +1,4 @@
 using AnaBellaApp.Web.Models;
-using AnaBellaApp.Web.Models.Store;
-using AnaBellaApp.Web.Services;
 using AnaBellaApp.Web.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -13,25 +11,38 @@ namespace AnaBellaApp.Web.Controllers
     {
         private readonly ILogger<HomeController> logger;
         private readonly IProductService productService;
+        private readonly ICategoryService categoryService;
 
         public HomeController(
             ILogger<HomeController> logger,
-            IProductService productService)
+            IProductService productService,
+            ICategoryService categoryService)
         {
             this.logger = logger;
             this.productService = productService;
+            this.categoryService = categoryService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var products = await productService.FindAllProducts();
+            var products = await productService.FindAllProducts("");
             return View(products);
         }
 
+        [Authorize]
         public async Task<IActionResult> Details(int id)
         {
-            //var token = await HttpContext.GetTokenAsync("access_token");
-            var model = await productService.FindProductById(id);
+            var token = await HttpContext.GetTokenAsync("access_token");
+            var model = await productService.FindProductById(id, token);
+
+            if (model != null)
+            {
+                var category = await categoryService.FindCategoryById(model.CategoryId, token);
+                if (category != null)
+                {
+                    ViewBag.Category = category.Name;
+                }
+            }
             return View(model);
         }
 

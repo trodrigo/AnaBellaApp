@@ -1,5 +1,6 @@
 ﻿using AnaBellaApp.ProductAPI.Data.ValueObjects;
 using AnaBellaApp.ProductAPI.Repository;
+using AnaBellaApp.ProductAPI.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace AnaBellaApp.ProductAPI.Controllers
             this.repository = repository ?? throw new ArgumentException(nameof(repository));
         }
 
-        [HttpGet]
+        [HttpGet]        
         public async Task<ActionResult<IEnumerable<ProductVO>>> FindAll()
         {
             var products = await repository.FindAll();
@@ -26,6 +27,7 @@ namespace AnaBellaApp.ProductAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<ProductVO>> FindById(long id)
         {
             var product = await repository.FindById(id);
@@ -35,6 +37,7 @@ namespace AnaBellaApp.ProductAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<ProductVO>> Create([FromBody] ProductVO vo)
         {
             if (vo == null) return BadRequest();
@@ -43,6 +46,7 @@ namespace AnaBellaApp.ProductAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<ActionResult<ProductVO>> Update([FromBody] ProductVO vo)
         {
             if (vo == null) return BadRequest();
@@ -51,6 +55,7 @@ namespace AnaBellaApp.ProductAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = Role.Admin)]
         public async Task<ActionResult> Delete(long id)
         {
             var status = await repository.Delete(id);
